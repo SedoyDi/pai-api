@@ -5,13 +5,11 @@ let outputFileContent = "./output/чеки_по_папкам.txt";
 
 const paid = {};
 const moths = [];
-const services = [
-    "гвс",
-    "электроснабжение",
-    "xвс",
-    "теплоснабжение",
-    "газоснабжение",
-];
+let cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
+
+const services = Array.from(new Set(cheques.map((c) => {
+    return c.replace(/\_.*/, '')
+})));
 
 function writeToOutFile(text) {
     try {
@@ -21,7 +19,7 @@ function writeToOutFile(text) {
     }
 }
 
-let cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
+
 
 const outCheques = cheques.map((c) => {
     let newCheque = ''
@@ -32,12 +30,14 @@ const outCheques = cheques.map((c) => {
     return newCheque
 }).sort((a, b) => a.localeCompare(b));
 
+
 outCheques.forEach((c) => writeToOutFile(`${c}\n`));
 
 writeToOutFile("Не оплачены:");
 
 for (const moth of new Set(moths)) {
     const s = new Set(paid[moth]);
+
     const filredServices = services.filter((e) => !s.has(e));
 
     if (filredServices.length === 0) {
@@ -46,4 +46,5 @@ for (const moth of new Set(moths)) {
 
     writeToOutFile(`\n${moth}:\n`);
     writeToOutFile(filredServices.join("\n"));
-}
+};
+
