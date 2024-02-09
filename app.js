@@ -2,11 +2,10 @@ let fs = require("fs");
 
 let inputFileContent = fs.readFileSync("./input/чеки.txt", "utf8");
 let outputFileContent = "./output/чеки_по_папкам.txt";
+let cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
 
 const paid = {};
 const moths = [];
-let cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
-
 const services = Array.from(new Set(cheques.map((c) => {
     return c.replace(/\_.*/, '')
 })));
@@ -18,8 +17,6 @@ function writeToOutFile(text) {
         console.log(e);
     }
 }
-
-
 
 const outCheques = cheques.map((c) => {
     let newCheque = ''
