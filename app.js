@@ -19,11 +19,11 @@ function writeToOutFile(text) {
 
 const t0 = performance.now();
 
+cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
+
 // services = Array.from(new Set(cheques.map((c) => {
 //     return c.replace(/\_.*/, '')
 // })));
-
-cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
 
 outCheques = cheques.map((c) => {
     let newCheque = ''
