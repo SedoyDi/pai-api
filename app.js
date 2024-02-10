@@ -17,6 +17,12 @@ function writeToOutFile(text) {
     }
 }
 
+const t0 = performance.now();
+
+// services = Array.from(new Set(cheques.map((c) => {
+//     return c.replace(/\_.*/, '')
+// })));
+
 cheques = inputFileContent.replaceAll(".pdf", "").split("\r\n");
 
 outCheques = cheques.map((c) => {
@@ -56,3 +62,17 @@ months.forEach((month) => {
         writeToOutFile(filredServices.join("\n"));
     }
 });
+
+// for (const month of new Set(months)) {
+//     const s = new Set(paid[month]);
+//     const filredServices = services.filter((e) => !s.has(e));
+
+//     if (filredServices.length === 0) {
+//         continue;
+//     }
+//     writeToOutFile(`\n${month}:\n`);
+//     writeToOutFile(filredServices.join("\n"));
+// };
+
+const t1 = performance.now();
+console.log(t1 - t0, 'mls');
