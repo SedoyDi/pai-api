@@ -53,15 +53,15 @@ outCheques.forEach((c) => writeToOutFile(`${c}\n`));
 
 writeToOutFile("Не оплачены:");
 
-months.forEach((month) => {
-    const s = new Set(paid[month]);
-    const filredServices = services.filter((e) => !s.has(e));
+// months.forEach((month) => {
+//     const s = new Set(paid[month]);
+//     const filredServices = services.filter((e) => !s.has(e));
 
-    if (filredServices.length !== 0) {
-        writeToOutFile(`\n${month}: \n`);
-        writeToOutFile(filredServices.join("\n"));
-    }
-});
+//     if (filredServices.length !== 0) {
+//         writeToOutFile(`\n${month}: \n`);
+//         writeToOutFile(filredServices.join("\n"));
+//     }
+// });
 
 // for (const month of new Set(months)) {
 //     const s = new Set(paid[month]);
@@ -73,6 +73,16 @@ months.forEach((month) => {
 //     writeToOutFile(`\n${month}:\n`);
 //     writeToOutFile(filredServices.join("\n"));
 // };
+
+for (let i = 0; i <= months.length; i++) {
+    month = months[i];
+    const s = new Set(paid[month]);
+    const filredServices = services.filter((e) => !s.has(e));
+    if (filredServices.length !== 0) {
+        writeToOutFile(`\n${month}: \n`);
+        writeToOutFile(filredServices.join("\n"));
+    }
+}
 
 const t1 = performance.now();
 console.log(t1 - t0, 'mls');
